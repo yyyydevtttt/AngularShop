@@ -21,25 +21,37 @@ server.listen(port, process.env.OPENSHIFT_NODEJS_IP || process.env.IP || undefin
   console.log('Express server listening on %d, in %s mode', port, app.get('env'));
 });
 
+const items = require('./api/mansWear.json');
 
-app.get('', function(req, res) {
-  res.status(200);
+app.get('/api/mansWear', function(req, res) {
+  res.status(200).json(items);
 });
 
-app.get('/api/heroes/:id', function(req, res) {
+app.get('/images', function(req, res) {
+  res.status(200).links('http://localhost:3000/images/mo/mens_outerwear.jpg');
+});
+
+app.get('/api/mansWear/:id', function(req, res) {
   let id = req.params.id;
-  
-  const item = items.filter(function(item, index){
-    if ((item.id).indexOf(id) >= 0) return true;
-  });
-  res.status(200).json(item[0]);
+  res.status(200).json(items[id]);
 });
 
-app.post('/api/heroes', function(req, res) {
+app.post('/api/mansWear', function(req, res) {
   items.push(req.body);
   res.status(200).json();
 });
 
+app.put('/api/mansWear', function(req, res) {
+  let id = req.body.id;
+  let issue = req.body.issue;
+  items[id] = JSON.parse(issue);
+  res.status(200).json();
+});
 
+app.delete('/api/mansWear/:id', function(req, res) {
+  let id = req.params.id;
+  items.splice(id, 1);
+  res.status(200).json();
+});
 
 exports = module.exports = app;

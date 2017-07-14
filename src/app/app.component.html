@@ -1,10 +1,12 @@
-<h2>{{title}}</h2>
-<nav>
-  <a routerLink="mens">Men's Outerwear</a>
-  <a routerLink="ladies">Ladies's Outerwear</a>
-  <a routerLink="mens-t">Men's T-Shirts</a>
-  <a routerLink="ladies-t">Ladies's T-Shirts</a>
-</nav>
-<router-outlet></router-outlet>
+<h1>ANGULARSHOP</h1>
 
-<!--<app-pages></app-pages> <router-outlet></router-outlet> -->
+<nav>
+  <a routerLink="/home" routerLinkActive="active">Home</a>
+  <a routerLink="/wear-view" routerLinkActive="active">Men's Outerwear</a>
+  <a routerLink="/wear-view2" routerLinkActive="active">Ladies Outerwear</a>
+  <a routerLink="/wear-view3" routerLinkActive="active">Men's T-Shirts</a>
+  <a routerLink="/wear-view4" routerLinkActive="active">Ladies T-Shirts</a>
+</nav>
+
+ <li *ngFor="let data of demoData">{{data.name}} - {{data.age}}</li>
+<router-outlet></router-outlet>
